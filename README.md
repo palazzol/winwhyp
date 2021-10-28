@@ -22,7 +22,7 @@ This port is a WIP and not tested very well.
 
 ## Known Bugs:
 
-The COM port is hardcoded!!  I will fix this soon but for now you need to recompile.
+The COM port is hardcoded!!  I will fix this soon but for now you need to edit [this line](https://github.com/palazzol/winwhyp/blob/main/src/UART.CPP#L76) and recompile.
 
 ## License:
 
