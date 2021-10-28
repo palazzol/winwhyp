@@ -1,6 +1,6 @@
 # WinWHYP
 
-Port of the WHYP Forth interface for DOS, to Windows (Visual Studio)
+Port of the WHYP Forth interface for DOS, to Windows (Visual Studio 2019)
 
 My former teacher, [Professor Richard E. Haskell](http://www.richardhaskell.com/), developed a Forth
 environment for teaching embedded systems and digital design in the 1990s at [Oakland University](https://oakland.edu/).
