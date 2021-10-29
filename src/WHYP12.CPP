@@ -5,11 +5,15 @@
 #include <iostream>
 #include <iomanip>
 #include <conio.h>
+#include <vector>
 
 #include "uart.h"
 #include "srecord.h"
 #include "wdict.h"
 #include "linklist.h"
+
+#include <windows.h>
+#include <synchapi.h>
 
 // create a uart object
 Uart uart_8250;
@@ -261,43 +265,29 @@ int    main()
 //  Check for COM1 or COM2
 void    check_COM_ports()
 	{
-#if 0
-	char recv_val;
-	long oldcount, newcount;
-	int ticks = 2;			// > 55 ms delay
-	bool ack = false;
-	send_int(rts_code);               // RTS
-	oldcount = biostime(0,0L);
-	newcount = oldcount;
-	while(!ack && (newcount - oldcount) < ticks)
-	   {
-	   if(uart_8250.check_recv(recv_val))
-	      do_recv(recv_val, ack);
-	   newcount = biostime(0,0L);
-	   }
-	if(ack)
-	   cout << endl << "Communicating with COM1";
-	else
-	   {
-	   uart_8250.change_com(1);          // try COM2
-	   send_int(rts_code);               // RTS
-	   oldcount = biostime(0,0L);
-	   newcount = oldcount;
-	   while(!ack && (newcount - oldcount) < ticks)
-	      {
-	      if(uart_8250.check_recv(recv_val))
-		 do_recv(recv_val, ack);
-	      newcount = biostime(0,0L);
-	      }
-	   if(ack)
-	      cout << endl << "Communicating with COM2" << endl;
-	   else
-	      {
-	      cout << endl << "Target board not responding" << endl;
-	      uart_8250.change_com(0);          // back to COM1
-	      }
-	   }
-#endif
+	int comport = uart_8250.get_com();
+	if (comport == 0) {
+		cout << endl << "COM port uninitialized!";
+	}
+	vector<unsigned int> list;
+	uart_8250.get_available_coms(list);
+	for ( unsigned int elem : list )
+	{
+		cout << endl << "Trying COM" << elem << "...";
+		uart_8250.change_com(elem); // set new COM port
+		char recv_val;
+		bool ack = false;
+		send_int(rts_code);               // RTS
+		Sleep(500);
+		if(uart_8250.check_recv(recv_val))
+			do_recv(recv_val, ack);
+		if(ack) {
+			cout << endl << "Communicating with COM" << comport;
+			return;
+		}
+	}
+	cout << endl << "Target board not responding" << endl;	
+	return;
 	}
 
 //  Wait for key press and return generalized ASCII code

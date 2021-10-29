@@ -139,9 +139,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="..\src\enumser.h" />
     <ClInclude Include="..\src\UART.H" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\src\enumser.cpp" />
     <ClCompile Include="..\src\HOST.CPP" />
     <ClCompile Include="..\src\UART.CPP" />
   </ItemGroup>

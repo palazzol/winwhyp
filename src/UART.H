@@ -7,23 +7,24 @@
 #ifndef UART_H
 #define UART_H
 
-enum Com_port {COM1, COM2};
-
 typedef void *HANDLE;
 
 class   Uart
 	{
 	private:
 		HANDLE commHandle;
+		int portnum;
 	public:
 	   Uart();				// constructor
 	   ~Uart();				// destructor
 	   void transmit_byte(char);			// transmit character
 	   bool check_recv(char&);				// get receive char
 	   void change_com(int);
+	   int get_com();
+	   void get_available_coms(std::vector<unsigned int> &list);
 	private:
 	   void init_term();               	// initialize terminal
-	   bool set_com(Com_port);        	// set COM - true if ok
+	   bool set_com(int port);        	// set COM - true if ok
 	   bool setbaud(long int);				// set baud rate - true if ok
 	   void enable_com();
 	   void disable_com();

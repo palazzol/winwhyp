@@ -139,12 +139,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="..\src\enumser.h" />
     <ClInclude Include="..\src\LINKLIST.H" />
     <ClInclude Include="..\src\SRECORD.H" />
     <ClInclude Include="..\src\UART.H" />
     <ClInclude Include="..\src\WDICT.H" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\src\enumser.cpp" />
     <ClCompile Include="..\src\SRECORD.CPP" />
     <ClCompile Include="..\src\UART.CPP" />
     <ClCompile Include="..\src\WDICT.CPP" />

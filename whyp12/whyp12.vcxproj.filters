@@ -23,6 +23,9 @@
     <ClInclude Include="..\src\WDICT.H">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\src\enumser.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\SRECORD.CPP">
@@ -35,6 +38,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\src\WHYP12.CPP">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\enumser.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

@@ -3,6 +3,8 @@
 // Terminal host program for downloading .s19 files to EEPROM memory
 // Modified 2000 to fix * handshaking (F4) for Motorola M68EVB912B32 board.
 
+#include <vector>
+
 #include "uart.h"
 
 #include <iostream>
@@ -21,7 +23,7 @@ using namespace std;
 Uart uart_8250;
 
 // Global variable
-int     COMnum = 0;     // COM1 = 0, COM2 = 1
+int     COMnum = 0;
 
 int    main()
 	{
@@ -36,7 +38,7 @@ int    main()
 	cout << "(Press F4 to download .S19 file with * handshake)" << endl;
 	cout << "(Press <Esc> to exit HOST)" << endl << endl;
 
-	uart_8250.change_com(COMnum);          // default is COM1
+	//uart_8250.change_com(COMnum);          // default is COM1
 	while(!done)
 	   {
 	   if(_kbhit())
@@ -76,13 +78,26 @@ int    main()
 //  Check for COM1 or COM2
 void    check_COM_port()
 	{
-	int com_num;
-	cout << endl << "Current COM port is COM" << COMnum+1;
-	cout << endl << "Enter new COM port (1 or 2): ";
-	cin >> com_num;
-	COMnum = com_num - 1;
-	uart_8250.change_com(COMnum);          // set new COM port
-	cout << endl << "Current COM port is COM" << COMnum+1;
+	int COMnum = uart_8250.get_com();
+	if (COMnum == 0)
+		cout << endl << "Current COM port is Invalid";
+	else
+		cout << endl << "Current COM port is COM" << COMnum;
+	cout << endl << "Available COMS are: ";
+	vector<unsigned int> list;
+	uart_8250.get_available_coms(list);
+	for ( unsigned int elem : list )
+	{
+		cout << elem << " ";
+	}
+	cout << endl << "Enter new COM port number: ";
+	cin >> COMnum;
+	uart_8250.change_com(COMnum); // set new COM port
+	COMnum = uart_8250.get_com();
+	if (COMnum == 0)
+		cout << endl << "Current COM port is Invalid";
+	else
+		cout << endl << "Current COM port is COM" << COMnum;
 	}
 
 void    download_s19_star()
