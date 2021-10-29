@@ -8,10 +8,9 @@ It is called WHYP for "Words to Help You Program."
 
 It is implemented on the Motorola 68HC11 and 68HC12 family of chips, and the interface is a DOS program.
 
-It is fully described in [his book](https://www.amazon.com/Design-Embedded-Systems-68HC12-Microcontrollers/dp/0130832081)
-which you can probably find on eBay
+It is fully described in his book, [Design of Embedded Systems Using 68HC12/11 Microcontrollers](https://www.amazon.com/Design-Embedded-Systems-68HC12-Microcontrollers/dp/0130832081)
 
-The original code and a couple papers are still available [here](http://www.cse.secs.oakland.edu/haskell/hc12_book.htm)
+The original code and some papers are still available [here](http://www.cse.secs.oakland.edu/haskell/hc12_book.htm)
 
 The DOS software can run in DOSBOX. I have ported the DOS software to Windows.  
 I hope to make a from new multi-platform Python version, so this is really just a stopgap and an easy way to run the software without an emulator.
