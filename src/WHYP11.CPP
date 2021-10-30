@@ -280,7 +280,7 @@ void    check_COM_ports()
 		if(uart_8250.check_recv(recv_val))
 			do_recv(recv_val, ack);
 		if(ack) {
-			cout << endl << "Communicating with COM" << comport;
+			cout << endl << "Communicating with COM" << elem;
 			return;
 		}
 	}

@@ -23,7 +23,7 @@ using namespace std;
 Uart uart_8250;
 
 // Global variable
-int     COMnum = 0;
+int     COMnum = uart_8250.get_com();
 
 int    main()
 	{
@@ -33,6 +33,10 @@ int    main()
 	bool done = false;
 
 	cout << endl << "Terminal host...9600 baud" << endl;
+	if (COMnum == 0)
+		cout << "Current COM port is Invalid" << endl;
+	else
+		cout << "Current COM port is COM" << COMnum << endl;
 	cout << "(Press F10 to check/change COM port)" << endl;
 	cout << "(Press F6 to download .S19 file)" << endl;
 	cout << "(Press F4 to download .S19 file with * handshake)" << endl;
@@ -111,7 +115,7 @@ void    download_s19_star()
 	if((s19file = fopen(filename,"r")) == NULL)
 	   {
 	   cout << "problem opening .s19 file\n";
-	   exit(1);
+	   return;
 	   }
 	eof = send_1_line(s19file);             // send 1 line
   	while(!eof)
@@ -201,7 +205,7 @@ void    download_s19()
 	if((s19file = fopen(filename,"r")) == NULL)
 	   {
 	   cout << "problem opening .s19 file\n";
-	   exit(1);
+	   return;
 	   }
 	cout << endl << "Getting data..." << endl;
 	do
